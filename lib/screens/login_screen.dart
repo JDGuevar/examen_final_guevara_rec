@@ -2,12 +2,12 @@ import 'package:examen_final_guevara_rec/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
   bool _rememberMe = false;
@@ -55,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                   value: _rememberMe,
                   onChanged: (value) {
                     setState(() {
+                      _rememberMe = value!;
                       Preferences.rememberMe = value!;
                     });
                   },
@@ -67,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () async {
                 String username = _userController.text.trim();
                 String password = _passController.text.trim();
-                Navigator.pushNamed(context, '/home');
+                Navigator.pushNamed(context, 'home');
                 /*bool success = await authProvider.login(username, password, _rememberMe);
                 if (success) {
                   await _saveUser(username);
@@ -80,12 +81,6 @@ class _LoginPageState extends State<LoginPage> {
                 */
               },
               child: Text("Iniciar sesión"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/register');
-              },
-              child: Text("Crear cuenta"),
             ),
           ],
         ),
